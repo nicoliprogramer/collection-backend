@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
+import { CreateEmployeeDto } from './dto/employee-create.dto';
 
 @Controller('employees')
 export class EmployeesController {
@@ -10,4 +11,10 @@ export class EmployeesController {
     const todos = await this.employeesService.getEmployees();
     return todos
     }
+
+    @Post('create')
+    async createEmployee(@Body() employee: CreateEmployeeDto) {
+    return await this.employeesService.createEmployee(employee)
+    }
+
 }
